@@ -2,13 +2,14 @@ import os
 
 import yaml
 
-from airtcp import AirTCP
 from checkin import Checker
 from notifier import ConsoleNotifier
 from result import Result
 from shadowsky import ShadowSky
+from airtcp import AirTCP
+from dounai import Dounai
 
-assigned_list = [ShadowSky, AirTCP]
+assigned_list = [ShadowSky, AirTCP, Dounai]
 
 
 def main():
