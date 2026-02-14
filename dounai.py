@@ -1,4 +1,6 @@
 import json
+import random
+import time
 
 import requests
 from checkin import Checkin
@@ -23,8 +25,21 @@ class Dounai(Checkin):
         login_result = json.loads(login_result.text.encode())
         if 'error_code' in login_result:
             return Result.fail(login_result['msg'])
-        dounai_headers.update({'Origin': 'https://dounai.pro', 'Referer': 'https://dounai.pro/user/panel',
-                                  'Accept': 'application/json, text/javascript, */*; q=0.01',
+        time.sleep(random.randint(1, 3))
+        dounai_headers.update({'Origin': 'https://dounai.pro', 
+                               'Accept': 'application/json, text/javascript, */*; q=0.01',
+                               'accept-encoding': 'gzip, deflate, br, zstd',
+                               'accept-language': 'zh-CN,zh;q=0.9',
+                               'pragma': 'no-cache',
+                               "priority": 'u=1, i',
+                               'Referer': 'https://dounai.pro/user/panel',
+                               'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+                               'sec-ch-ua-mobile': '?0',
+                               'sec-ch-ua-platform': '"Windows"',
+                               'sec-fetch-dest': 'empty',
+                               'sec-fetch-mode': 'cors',
+                               'sec-fetch-site': 'same-origin',
+                               'X-Requested-With': 'XMLHttpRequest',
                                   })
         dounai_checkin_page = dounai_session.post('https://dounai.pro/user/checkin',
                                                         headers=dounai_headers)
